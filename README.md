@@ -1,4 +1,4 @@
-# DocTrivia-AI
+
 # DocTrivia AI
 
 מערכת Backend ליצירת משחקי טריוויה חכמים על בסיס מסמכים, בשילוב AI, Kafka, PostgreSQL ודוקר.
