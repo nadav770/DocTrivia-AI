@@ -59,12 +59,12 @@ POST /api/documents
 "content": "This document covers basics of AI, including neural networks.",
 "status": "pending"
 }
-🧠 אינטגרציה עם AI
+## 🧠 אינטגרציה עם AI
 שירות Spring Boot שמתחבר ל-OpenAI או LLM אחר, מייצר שאלות טריוויה ממסמכים.
 
 אפשר לשדרג את המימוש לכל AI/LLM שתבחרו (הפרויקט גמיש לחלוטין).
 
-🕹️ תהליך עבודה כללי
+## 🕹️ תהליך עבודה כללי
 העלאת מסמך דרך ה-API .
 
 יצירת שאלות אוטומטית ע"י AI (או ידנית)
@@ -75,13 +75,13 @@ POST /api/documents
 
 הפקת סטטיסטיקות וסקירות למידה
 
-🐳 הרצה מהירה עם Docker
+## 🐳 הרצה מהירה עם Docker
 
 docker-compose up --build
 
 ירים את הסביבה: Postgres, Kafka, והפרויקט עצמו.
 
-🤖 פיצ'רים מתקדמים
+## 🤖 פיצ'רים מתקדמים
 עבודה אסינכרונית עם Kafka (משחקים בזמן אמת, הודעות)
 
 CI/CD מלא (GitHub Actions)
