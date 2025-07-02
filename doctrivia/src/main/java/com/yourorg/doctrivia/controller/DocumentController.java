@@ -14,19 +14,19 @@ public class DocumentController {
 
     private final DocumentRepository documentRepository;
 
-
     @GetMapping
-    public List<document> getAll(){
+    public List<document> getAll() {
         return documentRepository.findAll();
     }
 
     @PostMapping
-    public document upload(@RequestBody document doc){
+    public document upload(@RequestBody document doc) {
         doc.setStatus("pending");
         return documentRepository.save(doc);
     }
+
     @GetMapping("/{id}")
-    public document getBiId(@PathVariable Long id) {
+    public document getById(@PathVariable Long id) {
         return documentRepository.findById(id).orElse(null);
     }
 
