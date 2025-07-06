@@ -1,90 +1,129 @@
-
 # DocTrivia AI
 
-מערכת Backend ליצירת משחקי טריוויה חכמים על בסיס מסמכים, בשילוב AI, Kafka, PostgreSQL ודוקר.
+**DocTrivia AI** is an intelligent backend platform for generating trivia quizzes from educational documents using AI (OpenAI/LLM), built with Java, Spring Boot, PostgreSQL, Docker, and fully documented via Swagger.
 
-## 🚀 תיאור הפרויקט
+---
 
-DocTrivia AI הוא שירות Backend המאפשר העלאת מסמכים, הפקת שאלות טריוויה אוטומטיות בעזרת AI, ניהול היסטוריית משחקים, עבודה אסינכרונית עם Kafka, שמירת נתונים ב-PostgreSQL, ותיעוד API מלא ב-Swagger.
+## 🚀 Project Overview
 
-## 🛠️ טכנולוגיות מרכזיות
+DocTrivia AI allows users to upload study documents, automatically generates trivia questions using OpenAI, and manages game history and user answers. The app provides a RESTful API for client applications (React, mobile, etc.), supports JWT authentication, and can be easily deployed with Docker.
 
-- Java 21
-- Spring Boot 3.x
-- PostgreSQL
-- Apache Kafka
-- Docker & Docker Compose
-- Swagger/OpenAPI (springdoc)
-- Lombok
-- GitHub Actions (CI/CD)
-- אינטגרציה עם OpenAI API או LLM אחר
+---
 
-## 📦 מבנה הפרויקט
+## 🛠️ Tech Stack
 
-doc-trivia-ai/
-│
-├── src/main/java/com/yourorg/doctrivia/
-│ ├── controller
-│ ├── service
-│ ├── repository
-│ ├── model
-│ ├── config
-│ └── util
-│
-├── src/main/resources/
-│ └── application.yml
-├── Dockerfile
+- **Java 21**
+- **Spring Boot 3.x**
+- **PostgreSQL 16**
+- **OpenAI API (or other LLM)**
+- **Docker & Docker Compose**
+- **Spring Security + JWT Authentication**
+- **Swagger / OpenAPI 3 (springdoc)**
+- **Lombok**
+- **GitHub Actions (optional, CI/CD)**
+
+---
+
+## 📂 Project Structure
+
+DocTrivia-AI/
+├── doctrivia/ # Spring Boot backend source
+│ ├── src/
+│ ├── pom.xml
+│ └── ...
+├── client/ #  React frontend (recommended)
+│ ├── src/
+│ ├── package.json
+│ └── ...
 ├── docker-compose.yml
 ├── README.md
 └── ...
 
+---
+
+## ⚡ Main Features
+
+- **Upload Document:** Accepts plain text or future PDF (todo).
+- **Generate Trivia:** Uses AI to create 4-option multiple-choice questions from document.
+- **Answer Management:** Stores user answers and calculates game score.
+- **JWT Authentication:** Secures API endpoints.
+- **API Documentation:** Swagger-UI auto-generated.
+- **Easy Deployment:** Run locally or with Docker Compose.
 
 ---
 
-## 🌐 דוקומנטציית API (Swagger)
+## 🚧 Quickstart (Local Dev)
 
-- מריצים את הפרויקט (מקומית או בדוקר)
-- נכנסים לכתובת:
-  http://localhost:8080/swagger-ui.html
-- - אפשר לבדוק/לדבג כל Endpoint בקלות!
+### 1. **Clone the Repository**
+`bash
+git clone https://github.com/yourorg/DocTrivia-AI.git
+cd DocTrivia-AI/doctrivia
 
----
+2. **Configure Environment**
+Edit src/main/resources/application.properties as needed
+(set PostgreSQL DB, OpenAI API Key, etc.)
+3. **Run Database with Docker**
 
-## ⚡ דוגמת שימוש (POST Document)
+docker-compose up -d
 
-```json
-POST /api/documents
+4. **Run Backend**
+   ./mvnw spring-boot:run
+# or with IntelliJ "Run"
+
+5. **Access Swagger-UI (API Docs)**
+
+http://localhost:8080/swagger-ui.html
+
+🤖 **AI Integration**
+
+Uses OpenAI Chat Completions API
+
+Requires a valid API key (openai.api.key in properties)
+
+Example Prompt to AI:
+
+"Generate 5 trivia questions based on this document, each with 4 answer options and mark the correct one. Return JSON."
+
+🔐 **Authentication**
+
+JWT tokens are required for protected endpoints.
+
+Register/login with /api/auth/register and /api/auth/login.
+
+Authenticate with the Bearer <token> in the Authorization header.
+
+📦 **Example API Request**
+
+POST /api/ai/generate-questions
+Body:
+
 {
-"filename": "AI Handbook.pdf",
-"content": "This document covers basics of AI, including neural networks.",
-"status": "pending"
+"content": "Here is a summary of the chapter on World War II..."
 }
-🧠 אינטגרציה עם AI
-שירות Spring Boot שמתחבר ל-OpenAI או LLM אחר, מייצר שאלות טריוויה ממסמכים.
 
-אפשר לשדרג את המימוש לכל AI/LLM שתבחרו (הפרויקט גמיש לחלוטין).
+📝 **How to Add PDF Support**
 
-🕹️ תהליך עבודה כללי
-העלאת מסמך דרך ה-API .
+1.Add a file upload endpoint in your controller.
 
-יצירת שאלות אוטומטית ע"י AI (או ידנית)
+2.Use a PDF parser library (e.g. PDFBox) to extract text server-side.
 
-הצגת/שמירת שאלות במערכת (שייכות למסמך)
+3.Send the extracted text to the AI endpoint as before.
 
-ניהול היסטוריית תשובות/משחקים למשתמש
+💡  **Future Improvements**
+Frontend client in React for end-to-end demo
 
-הפקת סטטיסטיקות וסקירות למידה
+PDF file upload and parsing
 
-🐳 הרצה מהירה עם Docker
+Game history and stats UI
 
-docker-compose up --build
+Multi-user support & leaderboard
 
-ירים את הסביבה: Postgres, Kafka, והפרויקט עצמו.
+👤 **Author**
+Nadav (Backend Developer, Python & Java, AI Integration)
+LinkedIn Profile  www.linkedin.com/in/nadav-hakmon 
 
-🤖 פיצ'רים מתקדמים
-עבודה אסינכרונית עם Kafka (משחקים בזמן אמת, הודעות)
 
-CI/CD מלא (GitHub Actions)
 
-קונפיגורציה נוחה להחלפת ספקי AI
+
+
 
