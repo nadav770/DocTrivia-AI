@@ -4,26 +4,32 @@ import jakarta.persistence.*;
 import lombok.*;
 import io.swagger.v3.oas.annotations.media.Schema;
 
+import jakarta.persistence.*;
+
+import java.time.LocalDateTime;
+
 @Entity
-@Table(name = "questions")
+@Table(name = "answers")
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
 @Builder
-public class Question {
+public class Answers {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
+    private String selectedAnswer;
+    private boolean isCorrect;
+
     @ManyToOne
-    @JoinColumn(name = "document_id")
+    private User user;
+
+    @ManyToOne
     private document document;
 
-    @Column(columnDefinition = "TEXT")
-    private String question;
+    @ManyToOne
+    private Question question;
 
-    private String correctAnswer;
-    private String option2;
-    private String option3;
-    private String option4;
+    private LocalDateTime answeredAt = LocalDateTime.now();
 }

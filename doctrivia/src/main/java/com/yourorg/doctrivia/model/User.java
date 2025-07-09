@@ -13,7 +13,6 @@ import io.swagger.v3.oas.annotations.media.Schema;
 public class User {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Schema(accessMode = Schema.AccessMode.READ_ONLY)
     private Long id;
 
     @Column(unique = true)

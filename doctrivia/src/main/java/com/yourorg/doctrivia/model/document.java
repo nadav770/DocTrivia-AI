@@ -1,21 +1,30 @@
 package com.yourorg.doctrivia.model;
 
-import io.swagger.v3.oas.annotations.media.Schema;
+
 import jakarta.persistence.*;
 import lombok.*;
+import io.swagger.v3.oas.annotations.media.Schema;
+import java.time.LocalDateTime;
 
 @Entity
+@Table(name = "documents")
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
 @Builder
+
 public class document {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Schema(accessMode = Schema.AccessMode.READ_ONLY)
     private Long id;
 
+    private String title;
     private String filename;
+
+    @Lob
+    @Column(columnDefinition = "TEXT")
     private String content;
-    private String status;
+
+    @Builder.Default
+    private LocalDateTime uploadedAt = LocalDateTime.now();
 }
