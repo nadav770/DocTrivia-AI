@@ -2,7 +2,7 @@ package com.yourorg.doctrivia.service;
 
 import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.ObjectMapper;
-import com.yourorg.doctrivia.model.document;
+import com.yourorg.doctrivia.model.Document;
 import com.yourorg.doctrivia.model.Question;
 import com.yourorg.doctrivia.repository.DocumentRepository;
 import com.yourorg.doctrivia.repository.QuestionRepository;
@@ -23,7 +23,7 @@ public class QuestionService {
 
     public List<Question> generateQuestionsFromDocument(Long documentId) {
         // 1. שלוף את כל הטקסט של ה-PDF מתוך document
-        document doc = documentRepository.findById(documentId)
+        Document doc = documentRepository.findById(documentId)
                 .orElseThrow(() -> new RuntimeException("Document not found"));
         String pdfText = doc.getContent();
 
@@ -97,7 +97,7 @@ public class QuestionService {
 
     //  שליפת שאלות לפי מזהה מסמך
     public List<Question> getQuestionsByDocument(Long documentId) {
-        document doc = documentRepository.findById(documentId)
+        Document doc = documentRepository.findById(documentId)
                 .orElseThrow(() -> new RuntimeException("Document not found"));
         return questionRepository.findByDocument(doc);
     }

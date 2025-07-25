@@ -2,9 +2,6 @@ package com.yourorg.doctrivia.model;
 
 import jakarta.persistence.*;
 import lombok.*;
-import io.swagger.v3.oas.annotations.media.Schema;
-
-import jakarta.persistence.*;
 
 import java.time.LocalDateTime;
 
@@ -26,7 +23,7 @@ public class Answers {
     private User user;
 
     @ManyToOne
-    private document document;
+    private Document document;
 
     @ManyToOne
     private Question question;

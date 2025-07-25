@@ -2,7 +2,7 @@ package com.yourorg.doctrivia.model;
 
 import jakarta.persistence.*;
 import lombok.*;
-import io.swagger.v3.oas.annotations.media.Schema;
+
 import java.time.LocalDateTime;
 
 @Entity
@@ -22,7 +22,7 @@ public class Score {
 
     @ManyToOne
     @JoinColumn(name = "document_id")
-    private document document;
+    private Document document;
 
     private int totalQuestions;
     private int correctAnswers;

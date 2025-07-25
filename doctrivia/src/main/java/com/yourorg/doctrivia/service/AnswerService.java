@@ -3,7 +3,7 @@ package com.yourorg.doctrivia.service;
 import com.yourorg.doctrivia.model.Answers;
 import com.yourorg.doctrivia.model.Question;
 import com.yourorg.doctrivia.model.User;
-import com.yourorg.doctrivia.model.document;
+import com.yourorg.doctrivia.model.Document;
 import com.yourorg.doctrivia.repository.AnswerRepository;
 import com.yourorg.doctrivia.repository.DocumentRepository;
 import com.yourorg.doctrivia.repository.QuestionRepository;
@@ -24,7 +24,7 @@ public class AnswerService {
     public Answers saveAnswer(Long userId, Long documentId, Long questionId, String selectedAnswer) {
         User user = userRepository.findById(userId)
                 .orElseThrow(() -> new RuntimeException("User not found"));
-        document document = documentRepository.findById(documentId)
+        Document document = documentRepository.findById(documentId)
                 .orElseThrow(() -> new RuntimeException("Document not found"));
         Question question = questionRepository.findById(questionId)
                 .orElseThrow(() -> new RuntimeException("Question not found"));

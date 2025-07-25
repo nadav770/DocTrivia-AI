@@ -2,7 +2,6 @@ package com.yourorg.doctrivia.model;
 
 import jakarta.persistence.*;
 import lombok.*;
-import io.swagger.v3.oas.annotations.media.Schema;
 
 @Entity
 @Table(name = "questions")
@@ -17,7 +16,7 @@ public class Question {
 
     @ManyToOne
     @JoinColumn(name = "document_id")
-    private document document;
+    private Document document;
 
     @Column(columnDefinition = "TEXT")
     private String question;

@@ -2,7 +2,7 @@ package com.yourorg.doctrivia.service;
 
 import com.yourorg.doctrivia.model.Score;
 import com.yourorg.doctrivia.model.User;
-import com.yourorg.doctrivia.model.document;
+import com.yourorg.doctrivia.model.Document;
 import com.yourorg.doctrivia.repository.ScoreRepository;
 import com.yourorg.doctrivia.repository.UserRepository;
 import com.yourorg.doctrivia.repository.DocumentRepository;
@@ -21,7 +21,7 @@ public class ScoreService {
     // שמירת תוצאה
     public Score saveScore(Long userId, Long documentId, int totalQuestions, int correctAnswers, int score) {
         User user = userRepository.findById(userId).orElseThrow();
-        document doc = documentRepository.findById(documentId).orElseThrow();
+        Document doc = documentRepository.findById(documentId).orElseThrow();
         Score newScore = Score.builder()
                 .user(user)
                 .document(doc)

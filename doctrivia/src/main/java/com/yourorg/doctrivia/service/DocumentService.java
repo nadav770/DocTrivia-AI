@@ -1,6 +1,6 @@
 package com.yourorg.doctrivia.service;
 
-import com.yourorg.doctrivia.model.document;
+import com.yourorg.doctrivia.model.Document;
 import com.yourorg.doctrivia.repository.DocumentRepository;
 import lombok.extern.slf4j.Slf4j;
 import org.apache.pdfbox.pdmodel.PDDocument;
@@ -20,13 +20,13 @@ public class DocumentService {
     private DocumentRepository documentRepository;
 
     // שמירה ישירה של אובייקט document (CRUD בסיסי)
-    public document save(document doc) {
+    public Document save(Document doc) {
         log.info("Saving document: {}", doc.getTitle());
         return documentRepository.save(doc);
     }
 
     // העלאת PDF, שליפת טקסט, ושמירה
-    public document saveDocument(MultipartFile file, String title) {
+    public Document saveDocument(MultipartFile file, String title) {
         String content;
 
         try (PDDocument pdfDocument = PDDocument.load(file.getInputStream())) {
@@ -38,7 +38,7 @@ public class DocumentService {
             throw new RuntimeException("Failed to parse PDF file", e);
         }
 
-        document doc = document.builder()
+        Document doc = Document.builder()
                 .title(title)
                 .filename(file.getOriginalFilename())
                 .content(content)
@@ -48,12 +48,12 @@ public class DocumentService {
     }
 
     // שליפת כל המסמכים
-    public List<document> getAllDocuments() {
+    public List<Document> getAllDocuments() {
         return documentRepository.findAll();
     }
 
     // שליפת מסמך בודד
-    public document getDocumentById(Long id) {
+    public Document getDocumentById(Long id) {
         return documentRepository.findById(id)
                 .orElseThrow(() -> new RuntimeException("Document not found with id: " + id));
     }

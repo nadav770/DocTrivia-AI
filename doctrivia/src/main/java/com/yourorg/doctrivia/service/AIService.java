@@ -19,7 +19,24 @@ public class AIService {
 
     // דיפולט
     public String generateTrivia(String text) {
-        String prompt = "Generate 5 trivia questions in JSON format with question, correctAnswer, option2, option3, option4 based on this text: " + text;
+        String prompt = "אתה מחולל שאלות טריוויה חכם עבור מערכת לימודית. קבל קטע טקסט, וכתוב 5 שאלות טריוויה מאתגרות בעברית, בכל שאלה:\n" +
+                "- כתוב את השאלה, תשובה נכונה אחת, ועוד שלוש תשובות לא נכונות אך הגיוניות (על פי החומר בקטע).\n" +
+                "- וודא שהשאלות מגוונות – שאלות עובדתיות, הסקת מסקנות, השוואות או \"מה יקרה אם\".\n" +
+                "- השאלות יופיעו כ־JSON במבנה הבא:\n" +
+                "[\n" +
+                "  {\n" +
+                "    \"question\": \"כאן השאלה\",\n" +
+                "    \"correctAnswer\": \"תשובה נכונה\",\n" +
+                "    \"option2\": \"טעות 1\",\n" +
+                "    \"option3\": \"טעות 2\",\n" +
+                "    \"option4\": \"טעות 3\"\n" +
+                "  },\n" +
+                "  ...\n" +
+                "]\n" +
+                "השתמש רק בידע שמופיע בטקסט המצורף.\n" +
+                "קטע הטקסט:\n" +
+                "---\n" +
+                "{כאן להכניס את הטקסט}\n " + text;
         return generateTriviaWithPrompt(text, prompt);
     }
 

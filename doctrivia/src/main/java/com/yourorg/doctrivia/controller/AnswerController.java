@@ -4,7 +4,7 @@ import com.yourorg.doctrivia.dto.AnswerRequest;
 import com.yourorg.doctrivia.model.Answers;
 import com.yourorg.doctrivia.model.User;
 import com.yourorg.doctrivia.model.Question;
-import com.yourorg.doctrivia.model.document;
+import com.yourorg.doctrivia.model.Document;
 import com.yourorg.doctrivia.repository.AnswerRepository;
 import com.yourorg.doctrivia.repository.UserRepository;
 import com.yourorg.doctrivia.repository.QuestionRepository;
@@ -32,7 +32,7 @@ public class AnswerController {
                 .orElseThrow(() -> new RuntimeException("User not found"));
         Question question = questionRepository.findById(request.getQuestionId())
                 .orElseThrow(() -> new RuntimeException("Question not found"));
-        document doc = documentRepository.findById(request.getDocumentId())
+        Document doc = documentRepository.findById(request.getDocumentId())
                 .orElseThrow(() -> new RuntimeException("Document not found"));
 
         boolean isCorrect = question.getCorrectAnswer().equals(request.getSelectedAnswer());
