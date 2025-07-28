@@ -10,5 +10,7 @@ import java.util.List;
 public interface ScoreRepository extends JpaRepository<Score, Long> {
     List<Score> findByUserId(Long userId);
     List<Score> findByUserIdAndDocumentId(Long userId, Long documentId);
-    Score findTopByUserIdAndDocumentIdOrderByPlayedAtDesc(Long userId, Long documentId); // ניקוד אחרון
+    Score findTopByUserIdAndDocumentIdOrderByPlayedAtDesc(Long userId, Long documentId);
+    void deleteByDocumentId(Long documentId);
+
 }

@@ -22,6 +22,7 @@ public class AuthController {
         User user = User.builder()
                 .username(request.getUsername())
                 .password(passwordEncoder.encode(request.getPassword()))
+                .email(request.getEmail())
                 .build();
         User saved = userRepository.save(user);
         UserResponse resp = new UserResponse();

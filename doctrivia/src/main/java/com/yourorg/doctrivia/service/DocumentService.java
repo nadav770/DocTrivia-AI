@@ -2,6 +2,9 @@ package com.yourorg.doctrivia.service;
 
 import com.yourorg.doctrivia.model.Document;
 import com.yourorg.doctrivia.repository.DocumentRepository;
+import com.yourorg.doctrivia.repository.ScoreRepository;
+import com.yourorg.doctrivia.repository.QuestionRepository;
+import jakarta.transaction.Transactional;
 import lombok.extern.slf4j.Slf4j;
 import org.apache.pdfbox.pdmodel.PDDocument;
 import org.apache.pdfbox.text.PDFTextStripper;
@@ -19,13 +22,17 @@ public class DocumentService {
     @Autowired
     private DocumentRepository documentRepository;
 
-    // שמירה ישירה של אובייקט document (CRUD בסיסי)
+    @Autowired
+    private ScoreRepository scoreRepository;
+
+    @Autowired
+    private QuestionRepository questionRepository;
+    @Transactional
     public Document save(Document doc) {
         log.info("Saving document: {}", doc.getTitle());
         return documentRepository.save(doc);
     }
 
-    // העלאת PDF, שליפת טקסט, ושמירה
     public Document saveDocument(MultipartFile file, String title) {
         String content;
 
@@ -44,23 +51,29 @@ public class DocumentService {
                 .content(content)
                 .build();
 
-        return save(doc); // שימוש בפונקציה החדשה!
+        return save(doc);
     }
 
-    // שליפת כל המסמכים
     public List<Document> getAllDocuments() {
         return documentRepository.findAll();
     }
 
-    // שליפת מסמך בודד
     public Document getDocumentById(Long id) {
         return documentRepository.findById(id)
                 .orElseThrow(() -> new RuntimeException("Document not found with id: " + id));
     }
 
-    // מחיקת מסמך
+
     public void deleteDocument(Long id) {
         log.info("Deleting document with id: {}", id);
+
+        // מחיקת ציונים מקושרים למסמך
+        scoreRepository.deleteByDocumentId(id);
+
+        // מחיקת שאלות מקושרות למסמך
+        questionRepository.deleteByDocumentId(id);
+
+        // לבסוף מחיקת המסמך עצמו
         documentRepository.deleteById(id);
     }
 }

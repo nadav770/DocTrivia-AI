@@ -11,6 +11,7 @@ import org.springframework.stereotype.Service;
 
 import java.util.List;
 
+// service/ScoreService.java
 @Service
 @RequiredArgsConstructor
 public class ScoreService {
@@ -18,7 +19,6 @@ public class ScoreService {
     private final UserRepository userRepository;
     private final DocumentRepository documentRepository;
 
-    // שמירת תוצאה
     public Score saveScore(Long userId, Long documentId, int totalQuestions, int correctAnswers, int score) {
         User user = userRepository.findById(userId).orElseThrow();
         Document doc = documentRepository.findById(documentId).orElseThrow();
@@ -32,12 +32,6 @@ public class ScoreService {
         return scoreRepository.save(newScore);
     }
 
-    // שליפת ניקוד אחרון למשתמש+מסמך
-    public Score getLatestScore(Long userId, Long documentId) {
-        return scoreRepository.findTopByUserIdAndDocumentIdOrderByPlayedAtDesc(userId, documentId);
-    }
-
-    // שליפת כל התוצאות למשתמש
     public List<Score> getUserScores(Long userId) {
         return scoreRepository.findByUserId(userId);
     }
